@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
 import { summaryDonations } from './helpers';
-import { Card, CardContent, CardList } from './Card'
+import { Card, CardContent, CardList, CardImg, CardBtn, CardTitle } from './Card'
 
 export default connect((state) => state)(
   class App extends Component {
@@ -51,9 +51,10 @@ export default connect((state) => state)(
 
         return (
           <Card key={i}>
+            <CardImg src={`images/${item.image}`} />
             <CardContent>
-              <p>{item.name}</p>
-              <button
+              <CardTitle>{item.name}</CardTitle>
+              <CardBtn
                 onClick={handlePay.call(
                   self,
                   item.id,
@@ -61,8 +62,8 @@ export default connect((state) => state)(
                   item.currency
                 )}
               >
-                Pay
-              </button>
+                Donate
+              </CardBtn>
             </CardContent>
           </Card>
         );
