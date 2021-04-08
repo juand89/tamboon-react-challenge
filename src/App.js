@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { summaryDonations } from './helpers';
-
-const Card = styled.div`
-  margin: 10px;
-  border: 1px solid #ccc;
-`;
+import { Card, CardContent, CardList } from './Card'
 
 export default connect((state) => state)(
   class App extends Component {
@@ -56,18 +51,19 @@ export default connect((state) => state)(
 
         return (
           <Card key={i}>
-            <p>{item.name}</p>
-            {payments}
-            <button
-              onClick={handlePay.call(
-                self,
-                item.id,
-                self.state.selectedAmount,
-                item.currency
-              )}
-            >
-              Pay
-            </button>
+            <CardContent>
+              <p>{item.name}</p>
+              <button
+                onClick={handlePay.call(
+                  self,
+                  item.id,
+                  self.state.selectedAmount,
+                  item.currency
+                )}
+              >
+                Pay
+              </button>
+            </CardContent>
           </Card>
         );
       });
@@ -88,7 +84,9 @@ export default connect((state) => state)(
           <h1>Tamboon React</h1>
           <p>All donations: {donate}</p>
           <p style={style}>{message}</p>
-          {cards}
+          <CardList>
+            {cards}
+          </CardList>
         </div>
       );
     }
