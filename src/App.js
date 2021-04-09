@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
 import { summaryDonations } from './helpers';
 import { Card, CardContent, CardList, CardImg, CardBtn, CardTitle, CardOverlay, OverlayContent, CloseOverlay } from './Card'
-
+import { RadioList, RadioLabel, RadioInput } from './Radio'
 export default connect((state) => state)(
   class App extends Component {
     state = {
@@ -37,8 +37,8 @@ export default connect((state) => state)(
       const self = this;
       const cards = this.state.charities.map(function (item, i) {
         const payments = [10, 20, 50, 100, 500].map((amount, j) => (
-          <label key={j}>
-            <input
+          <RadioLabel key={j}>
+            <RadioInput
               type="radio"
               name="payment"
               onClick={function () {
@@ -46,7 +46,7 @@ export default connect((state) => state)(
               }}
             />
             {amount}
-          </label>
+          </RadioLabel>
         ));
 
         return (
@@ -57,7 +57,9 @@ export default connect((state) => state)(
               </CloseOverlay>
               <OverlayContent>
                 <span>Select the amount to donate(USD)</span>
-                {payments}
+                <RadioList>
+                  {payments}
+                </RadioList>
                 <CardBtn
                   onClick={() =>
                     self.handlePay(
