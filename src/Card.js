@@ -63,13 +63,15 @@ export const CardImg = styled.img`
   object-fit: fill;
 `;
 export const CardBtn = styled.button`
-  width: 100px;
+  width: 80px;
   height: 30px;
-  background-color: #fff;
+  font-weight: bold;
+  background-color: transparent;
   color: #0000ff;
   border: 1px solid #0000ff;
   cursor: pointer;
 `;
 export const CardTitle = styled.span`
   width: 250px;
+  color: #6e6d7b;
 `;
