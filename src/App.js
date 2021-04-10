@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
 import { summaryDonations } from './helpers';
-import { Card, CardContent, CardList, CardImg, CardBtn, CardTitle, CardOverlay, OverlayContent, CloseOverlay } from './Card'
-import { RadioForm, RadioLabel, RadioInput } from './Radio'
+import { Card, CardContent, CardList, CardImg, CardBtn, CardTitle, CardOverlay, OverlayContent, CloseOverlay } from './Card';
+import { RadioForm, RadioLabel, RadioInput } from './Radio';
+import { Alert } from './Alert';
 export default connect((state) => state)(
   class App extends Component {
     state = {
@@ -122,6 +123,7 @@ export default connect((state) => state)(
 
       return (
         <div>
+          <Alert success>Thank you! Your donation was successful!</Alert>
           <h1>Tamboon React</h1>
           <p>All donations: {donate}</p>
           <p style={style}>{message}</p>
