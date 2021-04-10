@@ -5,6 +5,7 @@ import { summaryDonations } from './helpers';
 import { Card, CardContent, CardList, CardImg, CardBtn, CardTitle, CardOverlay, OverlayContent, CloseOverlay } from './Card';
 import { RadioForm, RadioLabel, RadioInput } from './Radio';
 import { Alert } from './Alert';
+import { DonationsText, DonationsAmount, DonationsContainer } from './Donations';
 export default connect((state) => state)(
   class App extends Component {
     state = {
@@ -125,11 +126,12 @@ export default connect((state) => state)(
         <div>
           <Alert success>Thank you! Your donation was successful!</Alert>
           <h1>Tamboon React</h1>
-          <p>All donations: {donate}</p>
+          <DonationsContainer>
+            <DonationsText>All donations:</DonationsText>
+            <DonationsAmount> {donate}</DonationsAmount>
+          </DonationsContainer>
           <p style={style}>{message}</p>
-          <CardList>
-            {cards}
-          </CardList>
+          <CardList>{cards}</CardList>
         </div>
       );
     }
