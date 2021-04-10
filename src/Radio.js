@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const RadioList = styled.div`
+export const RadioForm = styled.form`
   display: flex;
   padding-top: 20px;
   padding-bottom: 20px;

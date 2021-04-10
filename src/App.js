@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
 import { summaryDonations } from './helpers';
 import { Card, CardContent, CardList, CardImg, CardBtn, CardTitle, CardOverlay, OverlayContent, CloseOverlay } from './Card'
-import { RadioList, RadioLabel, RadioInput } from './Radio'
+import { RadioForm, RadioLabel, RadioInput } from './Radio'
 export default connect((state) => state)(
   class App extends Component {
     state = {
@@ -18,7 +18,15 @@ export default connect((state) => state)(
           return resp.json();
         })
         .then(function (data) {
-          self.setState({ charities: data });
+          const newList = data.map((item) => {
+            const updatedItem = {
+              ...item,
+              showOverlay: false,
+              selectedAmount: 10,
+            };
+            return updatedItem;
+          });
+          self.setState({ charities: newList });
         });
 
       fetch('http://localhost:3001/payments')
@@ -32,7 +40,24 @@ export default connect((state) => state)(
           });
         });
     }
-
+    showPayments(index) {
+      const newList = this.state.charities;
+      newList[index].showOverlay = !newList[index].showOverlay;
+      this.setState({
+        charities: newList,
+      });
+    }
+    updateSelectedAmount(amount, index) {
+      const newList = this.state.charities;
+      newList[index].selectedAmount = parseInt(amount);
+      this.setState({
+        charities: newList,
+      });
+    }
+    handleSubmit(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
     render() {
       const self = this;
       const cards = this.state.charities.map(function (item, i) {
@@ -41,9 +66,9 @@ export default connect((state) => state)(
             <RadioInput
               type="radio"
               name="payment"
-              onClick={function () {
-                self.setState({ selectedAmount: amount });
-              }}
+              value={amount}
+              checked={item.selectedAmount === amount}
+              onChange={(e) => self.updateSelectedAmount(e.target.value, i)}
             />
             {amount}
           </RadioLabel>
@@ -51,41 +76,34 @@ export default connect((state) => state)(
 
         return (
           <Card key={i}>
-            <CardOverlay>
-              <CloseOverlay>
-                x
-              </CloseOverlay>
-              <OverlayContent>
-                <span>Select the amount to donate(USD)</span>
-                <RadioList>
-                  {payments}
-                </RadioList>
-                <CardBtn
-                  onClick={() =>
-                    self.handlePay(
-                      item.id,
-                      self.state.selectedAmount,
-                      item.currency
-                    )
-                  }
-                >
-                  Pay
-                </CardBtn>
-              </OverlayContent>
-            </CardOverlay>
+            {item.showOverlay && (
+              <CardOverlay>
+                <CloseOverlay onClick={() => self.showPayments(i)}>
+                  x
+                </CloseOverlay>
+                <OverlayContent>
+                  <span>Select the amount to donate(USD)</span>
+                  <RadioForm onSubmit={(e) => this.handleSubmit(e)}>
+                      {payments}
+                  </RadioForm>
+                  <CardBtn
+                    onClick={() =>
+                      self.handlePay(
+                        item.id,
+                        self.state.selectedAmount,
+                        item.currency
+                      )
+                    }
+                  >
+                    Pay
+                  </CardBtn>
+                </OverlayContent>
+              </CardOverlay>
+            )}
             <CardImg src={`images/${item.image}`} />
             <CardContent>
               <CardTitle>{item.name}</CardTitle>
-              <CardBtn
-                onClick={handlePay.call(
-                  self,
-                  item.id,
-                  self.state.selectedAmount,
-                  item.currency
-                )}
-              >
-                Donate
-              </CardBtn>
+              <CardBtn onClick={() => self.showPayments(i)}>Donate</CardBtn>
             </CardContent>
           </Card>
         );
