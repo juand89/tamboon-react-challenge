@@ -28,12 +28,13 @@ export default connect((state) => state)(
     };
 
     componentDidMount() {
-      const self = this;
       fetch('http://localhost:3001/charities')
-        .then(function (resp) {
-          return resp.json();
-        })
-        .then(function (data) {
+        .then(async (res) => {
+          const data = await res.json();
+          // check for error response
+          if (!res.ok) {
+            return Promise.reject(error);
+          }
           const newList = data.map((item) => {
             const updatedItem = {
               ...item,
@@ -42,9 +43,11 @@ export default connect((state) => state)(
             };
             return updatedItem;
           });
-          self.setState({ charities: newList });
+          this.setState({ charities: newList });
+        })
+        .catch((error) => {
+          console.error('error fetching payments', error);
         });
-
       this.fetchPayments();
     }
     fetchPayments() {
@@ -126,9 +129,8 @@ export default connect((state) => state)(
       e.preventDefault();
       e.stopPropagation();
     }
-    render() {
-      const self = this;
-      const cards = this.state.charities.map(function (item, i) {
+    render () {
+      const cards = this.state.charities.map((item, i) => {
         const payments = [10, 20, 50, 100, 500].map((amount, j) => (
           <RadioLabel key={j}>
             <RadioInput
@@ -136,7 +138,7 @@ export default connect((state) => state)(
               name="payment"
               value={amount}
               checked={item.selectedAmount === amount}
-              onChange={(e) => self.updateSelectedAmount(e.target.value, i)}
+              onChange={(e) => this.updateSelectedAmount(e.target.value, i)}
             />
             {amount}
           </RadioLabel>
@@ -146,7 +148,7 @@ export default connect((state) => state)(
           <Card key={i}>
             {item.showOverlay && (
               <CardOverlay>
-                <CloseOverlay onClick={() => self.showPayments(i)}>
+                <CloseOverlay onClick={() => this.showPayments(i)}>
                   x
                 </CloseOverlay>
                 <OverlayContent>
@@ -156,9 +158,9 @@ export default connect((state) => state)(
                   </RadioForm>
                   <CardBtn
                     onClick={() =>
-                      self.handlePay(
+                      this.handlePay(
                         item.id,
-                        self.state.selectedAmount,
+                        this.state.selectedAmount,
                         item.currency
                       )
                     }
@@ -171,7 +173,7 @@ export default connect((state) => state)(
             <CardImg src={`images/${item.image}`} />
             <CardContent>
               <CardTitle>{item.name}</CardTitle>
-              <CardBtn onClick={() => self.showPayments(i)}>Donate</CardBtn>
+              <CardBtn onClick={() => this.showPayments(i)}>Donate</CardBtn>
             </CardContent>
           </Card>
         );
@@ -179,7 +181,7 @@ export default connect((state) => state)(
 
       const donate = this.props.donate;
       const message = this.props.message;
-
+      
       return (
         <div>
           <h1>Tamboon React</h1>

@@ -19,7 +19,6 @@ const store = createStore(function (state, action) {
       donate: 0,
     });
     case 'UPDATE_TOTAL_DONATE':
-      console.log('update_total_donate');
       return Object.assign({}, _state, {
         donate: _state.donate + action.amount,
       });
