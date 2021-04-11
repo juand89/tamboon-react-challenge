@@ -15,4 +15,12 @@ export const Alert = styled.div`
   align-items: center;
   border: 1px solid transparent;
   border-radius: 4px;
+  // Mobile devices and tablets
+  @media only screen and (min-width: 480px) {
+    font-size: 24px;
+  }
+  // medium desktops and up
+  @media (min-width: 992px) {
+    font-size: 18px;
+  }
 `;

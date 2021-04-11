@@ -1,16 +1,51 @@
 import styled from 'styled-components';
 
+
 export const Card = styled.div`
   margin: 10px;
-  height: 420px;
-  width: 550px;
+  margin-top: 20px;
   border-radius: 3px;
   position: relative;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  // Mobile devices and tablets
+  @media only screen and (min-width: 480px) {
+    height: 520px;
+    width: 640px;
+  }
+  // medium desktops and up
+  @media (min-width: 992px) {
+    height: 420px;
+    width: 550px;
+  }
 `;
 export const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-right: auto;
+  margin-left: auto;
+  // tablets
+  @media (min-width: 576px) {
+    max-width: 540px;
+  }
+
+  // small desktops
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+
+  // medium desktops
+  @media (min-width: 992px) {
+    max-width: 590px; 
+  }
+
+  // large desktops and HD devices
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+  // extra large desktops and HD devices
+  @media (min-width: 1800px) {
+    max-width: 1720px;
+  }
 `;
 
 export const CardContent = styled.div`
@@ -22,15 +57,33 @@ export const CardContent = styled.div`
   padding-right: 20px;
   height: 45px;
   align-items: center;
+  // Mobile devices
+  @media only screen and (min-width: 480px) {
+    font-size: 24px;
+  }
+  // medium desktops and up
+  @media (min-width: 992px) {
+    font-size: 18px;
+  }
 `;
 export const CardOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  height: 420px;
-  width: 550px;
   border-radius: 3px;
   background-color: rgb(255, 255, 255, 0.9);
+
+  // Mobile devices and tablets
+  @media only screen and (min-width: 480px) {
+    height: 520px;
+    width: 640px;
+  }
+
+  // medium desktops and up
+  @media (min-width: 992px) {
+    height: 420px;
+    width: 550px;
+  }
 `;
 export const OverlayContent = styled.div`
   display: flex;
@@ -39,9 +92,17 @@ export const OverlayContent = styled.div`
   align-items: center;
   font-weight: bold;
   color: #6e6d7b;
-  font-size: 18px;
   height: 100%;
   width: 100%;
+
+  // Mobile devices
+  @media only screen and (min-width: 480px) {
+    font-size: 24px;
+  }
+  // medium desktops and up
+  @media (min-width: 992px) {
+    font-size: 18px;
+  }
 `;
 export const CloseOverlay = styled.button`
   position: absolute;
@@ -50,28 +111,65 @@ export const CloseOverlay = styled.button`
   right: 10px;
   border: 0px;
   background-color: transparent;
-  font-size: 18px;
   color: gray;
   font-weight: bold;
   margin-top: 10px;
+
+  // Mobile devices
+  @media only screen and (min-width: 480px) {
+    font-size: 24px;
+  }
+  // medium desktops and up
+  @media (min-width: 992px) {
+    font-size: 18px;
+  }
 `;
 export const CardImg = styled.img`
-  width: 550px;
-  height: 350px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   object-fit: fill;
+
+  // Mobile devices and tablets
+  @media only screen and (min-width: 480px) {
+    height: 440px;
+    width: 640px;
+  }
+
+  // medium desktops and up
+  @media (min-width: 992px) {
+    width: 550px;
+    height: 350px;
+  }
 `;
 export const CardBtn = styled.button`
-  width: 80px;
-  height: 30px;
-  font-weight: bold;
+  border-radius: 2px;
   background-color: transparent;
   color: #0000ff;
-  border: 1px solid #0000ff;
+  border: 1.5px solid #0000ff;
   cursor: pointer;
+  // Mobile devices
+  @media only screen and (min-width: 480px) {
+    width: 95px;
+    height: 35px;
+    font-size: 24px;
+  }
+  // medium desktops and up
+  @media (min-width: 992px) {
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
+  }
 `;
 export const CardTitle = styled.span`
   width: 250px;
   color: #6e6d7b;
+  font-weight: bold;
+  // Mobile devices and tablets
+  @media only screen and (min-width: 480px) {
+    font-size: 24px;
+  }
+  // medium desktops and up
+  @media (min-width: 992px) {
+    font-size: 18px;
+  }
 `;
