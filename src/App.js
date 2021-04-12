@@ -25,7 +25,6 @@ export default connect((state) => state)(
   class App extends Component {
     state = {
       charities: [],
-      selectedAmount: 10,
     };
 
     componentDidMount() {
@@ -149,7 +148,7 @@ export default connect((state) => state)(
                     onClick={() =>
                       this.handlePay(
                         item.id,
-                        this.state.selectedAmount,
+                        item.selectedAmount,
                         item.currency
                       )
                     }
