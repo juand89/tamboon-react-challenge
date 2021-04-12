@@ -1,8 +1,15 @@
 import styled from 'styled-components'
 
 export const DonationsContainer = styled.div`
-	display: inline-block;
-	margin-left: 15px;
+  margin-left: 15px;
+  // Mobile devices and tablets
+  @media only screen and (min-width: 480px) {
+    font-size: 24px;
+  }
+  // medium desktops and up
+  @media (min-width: 992px) {
+    font-size: 18px;
+  }
 `;
 
 export const DonationsText = styled.span`
@@ -17,14 +24,6 @@ export const DonationsText = styled.span`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   padding: 0.375rem 0.75rem;
-  // Mobile devices and tablets
-  @media only screen and (min-width: 480px) {
-    font-size: 24px;
-  }
-  // medium desktops and up
-  @media (min-width: 992px) {
-    font-size: 18px;
-  }
 `;
 export const DonationsAmount = styled.span`
   padding: 0.375rem 0.75rem;
@@ -35,13 +34,4 @@ export const DonationsAmount = styled.span`
   border: 1px solid #ced4da;
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
-  
-  // Mobile devices and tablets
-  @media only screen and (min-width: 480px) {
-    font-size: 24px;
-  }
-  // medium desktops and up
-  @media (min-width: 992px) {
-    font-size: 18px;
-  }
 `;

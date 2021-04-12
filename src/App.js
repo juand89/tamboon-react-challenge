@@ -20,7 +20,7 @@ import {
   DonationsAmount,
   DonationsContainer,
 } from './Donations';
-
+import { Container, ContainerTitle } from './Container';
 export default connect((state) => state)(
   class App extends Component {
     state = {
@@ -172,15 +172,15 @@ export default connect((state) => state)(
       const message = this.props.message;
       
       return (
-        <div>
-          <h1>Tamboon React</h1>
+        <Container>
+          <ContainerTitle>Tamboon React</ContainerTitle>
           {message && <Alert success={message.includes('success')}>{message}</Alert>}
           <DonationsContainer>
             <DonationsText>All donations:</DonationsText>
             <DonationsAmount> {donate}</DonationsAmount>
           </DonationsContainer>
           <CardList>{cards}</CardList>
-        </div>
+        </Container>
       );
     }
   }
