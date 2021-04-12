@@ -13,7 +13,6 @@ export const DonationsContainer = styled.div`
 `;
 
 export const DonationsText = styled.span`
-  color: #495057;
   text-align: center;
   white-space: nowrap;
   line-height: 1.5;
