@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
-import { summaryDonations } from './helpers';
+import { summaryDonations, newList, showPayments, updateSelectedAmount } from './helpers';
 import {
   Card,
   CardContent,
@@ -20,6 +20,7 @@ import {
   DonationsAmount,
   DonationsContainer,
 } from './Donations';
+
 export default connect((state) => state)(
   class App extends Component {
     state = {
@@ -35,15 +36,7 @@ export default connect((state) => state)(
           if (!res.ok) {
             return Promise.reject(error);
           }
-          const newList = data.map((item) => {
-            const updatedItem = {
-              ...item,
-              showOverlay: false,
-              selectedAmount: 10,
-            };
-            return updatedItem;
-          });
-          this.setState({ charities: newList });
+          this.setState({ charities: newList(data) });
         })
         .catch((error) => {
           console.error('error fetching payments', error);
@@ -112,17 +105,13 @@ export default connect((state) => state)(
       }, 3000);
     }
     showPayments(index) {
-      const newList = this.state.charities;
-      newList[index].showOverlay = !newList[index].showOverlay;
       this.setState({
-        charities: newList,
+        charities: showPayments(this.state.charities, index),
       });
     }
     updateSelectedAmount(amount, index) {
-      const newList = this.state.charities;
-      newList[index].selectedAmount = parseInt(amount);
       this.setState({
-        charities: newList,
+        charities: updateSelectedAmount(this.state.charities, amount,index),
       });
     }
     handleSubmit(e) {
