@@ -1,8 +1,4 @@
-<p align="center">
-  <a href='https://www.omise.co'>
-    <img src="https://cdn.omise.co/assets/omise-logo/omise-wordmark.png" width="300" />
-  </a>
-</p>
+![](https://i.imgur.com/gBM6Mbq.jpg)
 
 ## Description
 
